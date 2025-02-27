@@ -1,0 +1,97 @@
+######################################################################
+# Readme
+######################################################################
+# Execute this job:
+#   - connect to `nic` via ssh: `ssh username@nic` (enter passwd)
+#   - start job: `condor_submit /path/to/this/file.tbi`
+# 
+# Monitor jobs:
+#   - see machines: `condor_status`
+#   - see queue: `condor_q`
+#   - keep monitoring queue: `watch condor_q` (quit with ctrl + c)
+# 
+# Find out more at:
+# http://www.iac.es/sieinvens/siepedia/pmwiki.php?n=HOWTOs.CondorHowTo
+######################################################################
+
+
+######################################################################
+# Necessary parameters
+######################################################################
+
+# Shell script that you want to execute
+cmd = condor/train.sh
+
+# command line arguments
+#args = 
+
+# start directory
+initialdir = /work/scratch/yilmaz/
+
+# define output, error and log file
+identifier = testing_diffusion
+output = /work/scratch/yilmaz/logs/loc_$(cluster).$(Process)_$(identifier)_out.log
+error = /work/scratch/yilmaz/logs/loc_$(cluster).$(Process)_$(identifier)_err.log
+log = /work/scratch/yilmaz/logs/loc_$(cluster).$(Process)_$(identifier)_log.log
+
+# working environments
+getenv        = True
+#environment   = "working_dir=/home/staff/yilmaz/Projects/PyTorch_Repo_1x/ data_dir=/home/staff/eschweiler/Projects/PyTorch_Repo_1x/"
+
+
+######################################################################
+# Optional parameters
+######################################################################
+
+## A nice job will note change your priority. You can use this statement when you have enough time to wait for your results
+nice_user = False
+
+# Choose if jobs should run on cluster or workstation nodes. If unset jobs will run on each available node. Options are "cluster" or "workstations"
+requirements = (GPURAM>29000) && (POOL=="cluster")
+# && (POOL=="cluster") && (TARGET.Machine=="pc138.lfb.rwth-aachen.de") 
+
+# required CPU RAM
+request_memory = 1 GB
+
+# required GPU RAM (MB)
+# requirements =  
+# && (POOL=="cluster")
+# && (CUDADriverVersion==10.1) 
+
+# required number of CPU cores
+request_cpus = 1 
+
+# required number of GPUs
+request_gpus = 1
+
+# criterion after which to choose the machine
+# e.g. `rank = memory` takes machine with larges RAM
+# rank = load
+
+# request a certain machine
+# requirements = TARGET.Machine=="kepler.lfb.rwth-aachen.de"
+
+# number of seconds to wait before executing job 
+# deferral_time = (CurrentTime + 1)
+
+
+
+######################################################################
+# Further preferences
+######################################################################
+
+# sync logfile to logfiles instead of copying them after finishing
+stream_error = true
+stream_output = true
+should_transfer_files = YES
+
+# run with user's account
+run_as_owner = True
+load_profile = True
+
+# send email notifications (Always|Error|Complete|Never)
+notify_user   = dennis.eschweiler@lfb.rwth-aachen.de
+notification  = Never
+
+# number of executions of this job
+queue 1 
