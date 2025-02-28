@@ -31,7 +31,7 @@ def set_data(args):
 
     # here, we normalize the mask values for that accordingly
     max_val = args.max_val
-    min_val = args.min_val 
+    min_val = args.min_val
 
     # ignore the label 0 because it is the background
     for label in labels[1:]:
@@ -49,7 +49,7 @@ def set_data(args):
             indices = np.where(masks[frame] == label)
             if len(indices[0]) == 0:
                 continue
-            
+
             empty_img[
                 indices[0]
                 + 64

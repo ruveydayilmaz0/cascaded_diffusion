@@ -3,18 +3,20 @@ import os
 
 from .parrots_wrapper import TORCH_VERSION
 
-parrots_jit_option = os.getenv('PARROTS_JIT_OPTION')
+parrots_jit_option = os.getenv("PARROTS_JIT_OPTION")
 
-if TORCH_VERSION == 'parrots' and parrots_jit_option == 'ON':
+if TORCH_VERSION == "parrots" and parrots_jit_option == "ON":
     from parrots.jit import pat as jit
 else:
 
-    def jit(func=None,
-            check_input=None,
-            full_shape=True,
-            derivate=False,
-            coderize=False,
-            optimize=False):
+    def jit(
+        func=None,
+        check_input=None,
+        full_shape=True,
+        derivate=False,
+        coderize=False,
+        optimize=False,
+    ):
 
         def wrapper(func):
 
@@ -29,7 +31,7 @@ else:
             return func
 
 
-if TORCH_VERSION == 'parrots':
+if TORCH_VERSION == "parrots":
     from parrots.utils.tester import skip_no_elena
 else:
 
