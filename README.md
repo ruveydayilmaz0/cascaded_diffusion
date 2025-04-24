@@ -40,14 +40,7 @@ python utils/extract_single_cells.py \
 ```
 
 ## 💪 Training
-For generating synthetic masks, we first train a 2D [DDIM](https://github.com/huggingface/diffusers.git). 
-
-For training the DDIM, run:
-```bash
-python train/train_mask_ddim.py \
---dataset_path PATH_TO_THE_TRAIN_DATA \
---output_dir PATH_TO_SAVE_THE_OUTPUTS 
-```
+For generating synthetic masks, we first train a 2D unconditional DDPM. For training, follow the instructions in [DDPM](https://github.com/huggingface/diffusers.git).
 
 For the 3D datasets, the resulting 2D synthetic masks should be converted to 3D using [SyncDreamer+NeuS](https://github.com/liuyuan-pal/SyncDreamer.git). The generated volumes should be sliced in z running:
 ```bash
