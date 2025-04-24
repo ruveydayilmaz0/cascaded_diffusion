@@ -1,5 +1,6 @@
 .idea/
 
+condor/
 training/
 lightning_logs/
 image_log/
